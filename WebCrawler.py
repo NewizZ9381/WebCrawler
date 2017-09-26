@@ -12,6 +12,13 @@
 
 # page = contents of a web page
 
+def get_page(url):
+    try:
+        from urllib.request import urlopen
+        return urlopen(url).read()
+    except:
+        return ""
+
 def get_next_link(page):
     start_link = page.find('<a href=')
     start_quote = page.find('"',start_link)
@@ -19,9 +26,22 @@ def get_next_link(page):
     url = page[start_quote+1:end_quote]
     return url, end_quote
 
-page =('<div id="top_bin"><div id="top_content" class="width960">'
-'<div class="udacity float-left"><a href="http://udacity.com">')
-url, end_quote = get_next_link(page)
+def print_all_links(page):
+    while True:
+        url, end_quote = get_next_link(page)
+        if url:
+            print (url)
+            page = page[end_quote:]
+        else:
+            break
+        
+#page = get_page("http://xkcd.com/353")
+#url, end_quote = get_next_link(page)
+#print (url)
+#print (end_quote)
+        
+page = '"zskchakdsuhaudh <a href="1.com">dasdasdasdasdasdasd <a href="2.com"> xxxxxxxxxxxxxxxxxxxxx <a href="3.com">'
+print_all_links(page)
 
-print (url)
-print (end_quote)
+
+
