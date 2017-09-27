@@ -35,9 +35,20 @@ def print_all_links(page):
         else:
             break
 
+def get_all_links(page):
+    links = []
+    while True:
+        url, end_quote = get_next_link(page)
+        if url:
+            links.append(url)
+            page = page[end_quote:]
+        else:
+            break
+    return links
+
 page = bytes.decode(get_page("http://xkcd.com/353"))
-print (type(page))
-print_all_links(page)
+all_links = get_all_links(page)
+print (all_links)
 
 
 
