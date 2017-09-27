@@ -34,13 +34,9 @@ def print_all_links(page):
             page = page[end_quote:]
         else:
             break
-        
-#page = get_page("http://xkcd.com/353")
-#url, end_quote = get_next_link(page)
-#print (url)
-#print (end_quote)
-        
-page = '"zskchakdsuhaudh <a href="1.com">dasdasdasdasdasdasd <a href="2.com"> xxxxxxxxxxxxxxxxxxxxx <a href="3.com">'
+
+page = bytes.decode(get_page("http://xkcd.com/353"))
+print (type(page))
 print_all_links(page)
 
 
