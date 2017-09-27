@@ -46,9 +46,34 @@ def get_all_links(page):
             break
     return links
 
-page = bytes.decode(get_page("http://xkcd.com/353"))
-all_links = get_all_links(page)
-print (all_links)
+def union(p, q):
+    for e in q:
+        if e not in p:
+            p.append(e)
+
+def crawl_web(seed):
+    tocrawl = [seed]
+    crawled = []
+    while tocrawl:
+        print('1 tocrawl is ', tocrawl)
+        print('1 crawled is ', crawled)
+        print('*************************************')
+        webpage = tocrawl.pop() #depth first search
+        print(webpage)
+        if webpage not in crawled:
+            a = union(tocrawl, get_all_links(bytes.decode(get_page(webpage))))
+            print('*************************************')
+            print('a is ', a)
+            crawled.append(webpage)
+            print('tocrawl is ', tocrawl)
+            print('*************************************')
+            print('crawled is ', crawled)
+            print('*************************************')
+    return crawled
+    
+seed = "http://udacity.com"
+print('*************************************')
+print (crawl_web(seed))
 
 
 
